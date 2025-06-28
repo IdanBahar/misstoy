@@ -26,17 +26,21 @@ const labels = [
 _createToys()
 
 async function query(filterBy = {}) {
-  console.log('🔎 FILTER RECEIVED:', filterBy)
   try {
     let toys = await storageService.query(STORAGE_KEY)
+    console.log('🧩 Total toys before filtering:', toys.length)
     const { name = '', label = '', inStock, sortBy = '' } = filterBy
 
     if (name) {
+      console.log('🔠 Filtering by name:', name)
+
       const lowerName = name.toLowerCase()
       toys = toys.filter((toy) => toy.name?.toLowerCase().includes(lowerName))
     }
 
     if (label) {
+      console.log('🏷️ Filtering by label:', label)
+
       const lowerLabel = label.toLowerCase()
       toys = toys.filter((toy) =>
         toy.labels?.some((lbl) => lbl.toLowerCase().includes(lowerLabel))
@@ -48,12 +52,15 @@ async function query(filterBy = {}) {
     }
 
     if (sortBy) {
+      console.log('🔀 Sorting by:', sortBy)
+
       toys.sort((a, b) => {
         if (sortBy === 'name') return a.name.localeCompare(b.name)
         if (sortBy === 'price') return a.price - b.price
         if (sortBy === 'createdAt') return a.createdAt - b.createdAt
       })
     }
+    console.log('✅ Toys after filtering:', toys.length)
     return toys
   } catch (error) {
     console.log('error:', error)
@@ -107,7 +114,14 @@ function getFilterFromSearchParams(searchParams) {
   const defaultFilter = getDefaultFilter()
   const filterBy = {}
   for (const field in defaultFilter) {
-    filterBy[field] = searchParams.get(field) || ''
+    const value = searchParams.get(field)
+    if (field === 'inStock') {
+      filterBy.inStock =
+        value === 'true' ? true : value === 'false' ? false : ''
+    } else {
+      filterBy[field] =
+        value !== null ? decodeURIComponent(value) : defaultFilter[field]
+    }
   }
   return filterBy
 }

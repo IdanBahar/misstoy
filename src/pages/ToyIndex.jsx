@@ -32,13 +32,16 @@ export function ToyIndex() {
     setFilterBy(filterBy)
   }
 
-  console.log('toys:', toys)
-  const { name, label } = filterBy
+  // console.log('toys:', toys)
+  const { name, label, isStock, sortBy } = filterBy
 
   return (
     <section className='robot-index'>
       <h1>Welcome to Our amazing toy app!</h1>
-      <ToyFilter onSetFilterBy={onSetFilterBy} filterBy={{ name, label }} />
+      <ToyFilter
+        onSetFilterBy={onSetFilterBy}
+        filterBy={{ name, label, isStock, sortBy }}
+      />
 
       <ToyList toys={toys} onRemoveToy={onRemoveToy} />
     </section>

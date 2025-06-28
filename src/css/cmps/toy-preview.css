@@ -52,6 +52,7 @@
   border-radius: 12px;
   font-size: 0.85rem;
   color: #fff;
+  cursor: pointer;
 }
 
 @media (min-width: 600px) {

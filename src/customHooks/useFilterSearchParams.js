@@ -9,10 +9,24 @@ export function useFilterSearchParams() {
 
   useEffect(() => {
     setFilterBy(toyService.getFilterFromSearchParams(searchParams))
-  }, [])
-
+  }, [searchParams])
   function setExistFilterSearchParams(filterBy) {
-    setSearchParams(getExistingProperties(filterBy))
+    setSearchParams((prev) => {
+      const params = new URLSearchParams(prev)
+      const existing = getExistingProperties(filterBy)
+
+      for (const key of params.keys()) {
+        if (!existing[key]) {
+          params.delete(key)
+        }
+      }
+
+      for (const key in existing) {
+        params.set(key, existing[key])
+      }
+
+      return params
+    })
   }
 
   return setExistFilterSearchParams

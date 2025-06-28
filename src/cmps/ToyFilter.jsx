@@ -1,17 +1,40 @@
 import { useEffect, useRef, useState } from 'react'
 import { debounce } from '../services/util.service.js'
+import { useSelector } from 'react-redux'
+import { useEffectUpdate } from '../customHooks/useEffectUpdate.js'
 
 export function ToyFilter({ filterBy, onSetFilterBy }) {
   const [filterByToEdit, setFilterByToEdit] = useState(filterBy)
-  const onSetFilterByDebounce = useRef(debounce(onSetFilterBy, 400)).current
+  const onSetFilterByDebounce = useRef(debounce(onSetFilterBy, 1000)).current
+
   const [isCollapsed, setIsCollapsed] = useState(true)
+  const isFirstRender = useRef(true)
 
   function toggleCollapse() {
     setIsCollapsed((prev) => !prev)
   }
 
+  useEffectUpdate(() => {
+    setFilterByToEdit((prev) => {
+      if (
+        prev.name !== filterBy.name ||
+        prev.label !== filterBy.label ||
+        prev.inStock !== filterBy.inStock ||
+        prev.sortBy !== filterBy.sortBy
+      ) {
+        return filterBy
+      }
+      return prev
+    })
+  }, [filterBy])
+
   useEffect(() => {
+    if (isFirstRender.current) {
+      isFirstRender.current = false
+      return
+    }
     onSetFilterByDebounce(filterByToEdit)
+    console.log('filterBy:', filterByToEdit)
   }, [filterByToEdit])
 
   function handleChange({ target }) {
@@ -31,10 +54,11 @@ export function ToyFilter({ filterBy, onSetFilterBy }) {
       default:
         break
     }
-    setFilterByToEdit((prevFilter) => ({ ...prevFilter, [field]: value }))
+    const newFilterBy = { ...filterByToEdit, [field]: value }
+    setFilterByToEdit(newFilterBy)
+    onSetFilterByDebounce(newFilterBy)
   }
 
-  const { name, label, inStock, sortBy } = filterByToEdit
   const labels = [
     'On wheels',
     'Box game',
@@ -56,11 +80,21 @@ export function ToyFilter({ filterBy, onSetFilterBy }) {
       <form className='toy-filter'>
         <section>
           <label htmlFor='name'>Toy Name</label>
-          <input value={name} name='name' id='name' onChange={handleChange} />
+          <input
+            value={filterByToEdit.name}
+            name='name'
+            id='name'
+            onChange={handleChange}
+          />
         </section>
         <section>
           <label htmlFor='label'>Tags</label>
-          <select name='label' id='label' value={label} onChange={handleChange}>
+          <select
+            name='label'
+            id='label'
+            value={filterByToEdit.label}
+            onChange={handleChange}
+          >
             <option value=''>All</option>
             {labels.map((lbl) => (
               <option key={lbl} value={lbl}>
@@ -74,7 +108,7 @@ export function ToyFilter({ filterBy, onSetFilterBy }) {
           <select
             name='inStock'
             id='inStock'
-            value={inStock}
+            value={filterByToEdit.inStock}
             onChange={handleChange}
           >
             <option value=''>All</option>
@@ -87,7 +121,7 @@ export function ToyFilter({ filterBy, onSetFilterBy }) {
           <select
             name='sortBy'
             id='sortBy'
-            value={sortBy}
+            value={filterByToEdit.sortBy}
             onChange={handleChange}
           >
             <option value=''>None</option>
