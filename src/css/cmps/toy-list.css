@@ -1,0 +1,43 @@
+.toy-list {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: center;
+  padding: 0;
+  margin: 0;
+}
+
+.toy-list li {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1 1 280px;
+  max-width: 320px;
+  padding: 0;
+  margin: 0;
+}
+
+.toy-actions {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  padding-top: 0.5rem;
+}
+
+.toy-actions button,
+.toy-actions a {
+  background-color: var(--clr-orange);
+  color: white;
+  border: none;
+  padding: 0.4rem 0.8rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  text-decoration: none;
+}
+
+.toy-actions button:hover,
+.toy-actions a:hover {
+  background-color: var(--clr-dark-red);
+}

@@ -1,0 +1,89 @@
+.toy-filter {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  background-color: var(--clr-superlight-green);
+  border: 2px solid var(--clr-light-green);
+  border-radius: 12px;
+  padding: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.toy-filter section {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 200px;
+}
+
+.toy-filter label {
+  font-weight: bold;
+  margin-bottom: 0.3rem;
+  color: var(--clr-dark-red);
+}
+
+.toy-filter input {
+  padding: 0.5rem;
+  border-radius: 6px;
+  border: 1px solid var(--clr-light-brown);
+  font-size: 1rem;
+}
+
+.toy-filter select {
+  padding: 0.5rem;
+  border-radius: 6px;
+  border: 1px solid var(--clr-light-brown);
+  font-size: 1rem;
+  background-color: white;
+}
+
+.toy-filter button {
+  margin-top: auto;
+  padding: 0.6rem 1.2rem;
+  background-color: var(--clr-orange);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.toy-filter button:hover {
+  background-color: var(--clr-dark-red);
+}
+
+.filter-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.75rem 1rem;
+  background-color: var(--clr-peach-pink);
+  border-radius: 8px;
+  color: var(--clr-dark-red);
+  font-weight: bold;
+  font-size: 1.1rem;
+  margin-bottom: 0.5rem;
+  cursor: pointer;
+  user-select: none;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.2s ease;
+}
+
+.filter-toggle:hover {
+  background-color: var(--clr-dark-pink);
+}
+
+.filter-toggle::after {
+  content: '▼';
+  display: inline-block;
+  margin-left: 0.5rem;
+  transition: transform 0.3s ease;
+}
+
+.filter-collapsed .filter-toggle::after {
+  transform: rotate(-90deg);
+}
+
+.toy-filter-wrapper.filter-collapsed .toy-filter {
+  display: none;
+}

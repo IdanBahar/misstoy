@@ -1,0 +1,110 @@
+@import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@600&display=swap');
+
+.app-header {
+  background: linear-gradient(
+    135deg,
+    var(--clr-light-green),
+    var(--clr-orange)
+  );
+  padding: 2rem 0;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+  border-radius: 0 0 20px 20px;
+  position: relative;
+  overflow: hidden;
+}
+
+.app-header::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -50%;
+  width: 200%;
+  height: 100%;
+  background: radial-gradient(
+    circle at center,
+    rgba(255, 255, 255, 0.1),
+    transparent 70%
+  );
+  animation: move-bg 6s linear infinite;
+}
+
+@keyframes move-bg {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(50%);
+  }
+}
+
+.app-header-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  position: relative;
+  z-index: 1;
+}
+
+.app-header h1 {
+  font-size: 3rem;
+  font-family: 'Fredoka', sans-serif;
+  font-weight: bold;
+  color: var(--clr-dark-pink);
+  margin-bottom: 0.8rem;
+  letter-spacing: 1px;
+}
+
+.app-header-nav {
+  display: flex;
+  gap: 2rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.app-header-nav a {
+  position: relative;
+  font-size: 1.2rem;
+  color: var(--clr-dark-red);
+  font-weight: 600;
+  text-decoration: none;
+  padding-bottom: 0.3rem;
+  transition: color 0.3s ease;
+}
+
+.app-header-nav a::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 2px;
+  background-color: var(--clr-orange);
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.3s ease;
+}
+
+.app-header-nav a:hover {
+  color: var(--clr-dark-pink);
+}
+
+.app-header-nav a:hover::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+@media (min-width: 600px) {
+  .app-header-container {
+    flex-direction: row;
+    justify-content: space-between;
+    text-align: left;
+  }
+
+  .app-header h1 {
+    margin-bottom: 0;
+  }
+}
