@@ -8,6 +8,14 @@
   padding: 1rem;
   margin-bottom: 1.5rem;
 }
+.toy-filter.dark {
+  background-color: #000;
+  border: 2px solid #fff;
+  color: #fff;
+}
+.toy-filter.dark label {
+  color: #fff;
+}
 
 .toy-filter section {
   display: flex;
@@ -51,7 +59,9 @@
 .toy-filter button:hover {
   background-color: var(--clr-dark-red);
 }
-
+.toy-filter.dark button {
+  background-color: #888686;
+}
 .filter-toggle {
   display: flex;
   align-items: center;
@@ -67,6 +77,14 @@
   user-select: none;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   transition: background-color 0.2s ease;
+}
+.filter-toggle.dark {
+  background-color: black;
+  border: 2px solid #fff;
+  color: #fff;
+}
+.filter-toggle.dark:hover {
+  background: rgba(233, 227, 227, 0.1);
 }
 
 .filter-toggle:hover {

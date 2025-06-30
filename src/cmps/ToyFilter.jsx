@@ -1,9 +1,9 @@
-import { useEffect, useRef, useState } from 'react'
+import { useContext, useEffect, useRef, useState } from 'react'
 import { debounce } from '../services/util.service.js'
-import { useSelector } from 'react-redux'
 import { useEffectUpdate } from '../customHooks/useEffectUpdate.js'
-
+import { ThemeContext } from '../contexts/ThemeContext'
 export function ToyFilter({ filterBy, onSetFilterBy }) {
+  const { theme, setTheme } = useContext(ThemeContext)
   const [filterByToEdit, setFilterByToEdit] = useState(filterBy)
   const onSetFilterByDebounce = useRef(debounce(onSetFilterBy, 1000)).current
 
@@ -74,14 +74,17 @@ export function ToyFilter({ filterBy, onSetFilterBy }) {
     <div
       className={`toy-filter-wrapper ${isCollapsed ? 'filter-collapsed' : ''}`}
     >
-      <div className='filter-toggle' onClick={toggleCollapse}>
+      <div
+        className={`filter-toggle ${theme ? 'dark' : ''}`}
+        onClick={toggleCollapse}
+      >
         Filter
       </div>
-      <form className='toy-filter'>
+      <form className={`toy-filter ${theme ? 'dark' : ''}`}>
         <section>
           <label htmlFor='name'>Toy Name</label>
           <input
-            value={filterByToEdit.name}
+            value={filterByToEdit.name || ''}
             name='name'
             id='name'
             onChange={handleChange}
@@ -92,7 +95,7 @@ export function ToyFilter({ filterBy, onSetFilterBy }) {
           <select
             name='label'
             id='label'
-            value={filterByToEdit.label}
+            value={filterByToEdit.label || ''}
             onChange={handleChange}
           >
             <option value=''>All</option>
@@ -108,7 +111,7 @@ export function ToyFilter({ filterBy, onSetFilterBy }) {
           <select
             name='inStock'
             id='inStock'
-            value={filterByToEdit.inStock}
+            value={filterByToEdit.inStock || ''}
             onChange={handleChange}
           >
             <option value=''>All</option>
@@ -121,7 +124,7 @@ export function ToyFilter({ filterBy, onSetFilterBy }) {
           <select
             name='sortBy'
             id='sortBy'
-            value={filterByToEdit.sortBy}
+            value={filterByToEdit.sortBy || ''}
             onChange={handleChange}
           >
             <option value=''>None</option>
@@ -132,6 +135,7 @@ export function ToyFilter({ filterBy, onSetFilterBy }) {
         </section>
         <section>
           <button
+            className={`${theme ? 'dark' : ''}`}
             type='button'
             onClick={() =>
               setFilterByToEdit({

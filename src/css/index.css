@@ -6,3 +6,5 @@
 @import './cmps/confirm-modal.css';
 @import './cmps//user-msg.css';
 @import './cmps/toy-filter.css';
+@import './cmps/theme-toggle.css';
+@import './pages/toy-details.css';

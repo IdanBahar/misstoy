@@ -28,7 +28,7 @@ _createToys()
 async function query(filterBy = {}) {
   try {
     let toys = await storageService.query(STORAGE_KEY)
-    console.log('🧩 Total toys before filtering:', toys.length)
+    // console.log(' Total toys before filtering:', toys.length)
     const { name = '', label = '', inStock, sortBy = '' } = filterBy
 
     if (name) {
@@ -39,7 +39,7 @@ async function query(filterBy = {}) {
     }
 
     if (label) {
-      console.log('🏷️ Filtering by label:', label)
+      // console.log('Filtering by label:', label)
 
       const lowerLabel = label.toLowerCase()
       toys = toys.filter((toy) =>
@@ -52,7 +52,7 @@ async function query(filterBy = {}) {
     }
 
     if (sortBy) {
-      console.log('🔀 Sorting by:', sortBy)
+      // console.log('Sorting by:', sortBy)
 
       toys.sort((a, b) => {
         if (sortBy === 'name') return a.name.localeCompare(b.name)
@@ -60,7 +60,7 @@ async function query(filterBy = {}) {
         if (sortBy === 'createdAt') return a.createdAt - b.createdAt
       })
     }
-    console.log('✅ Toys after filtering:', toys.length)
+    // console.log(' Toys after filtering:', toys.length)
     return toys
   } catch (error) {
     console.log('error:', error)
@@ -73,11 +73,6 @@ function getById(id) {
 }
 
 async function remove(id) {
-  const toys = await storageService.query('toys')
-  console.log(
-    '📦 All toy IDs before removal:',
-    toys.map((t) => t._id)
-  )
   return storageService.remove(STORAGE_KEY, id)
 }
 
@@ -90,7 +85,13 @@ function save(toyToSave) {
   }
 }
 
-function createToy({ name = '', price = 0, labels = [], inStock = true } = {}) {
+function createToy({
+  name = '',
+  price = 0,
+  labels = [],
+  inStock = true,
+  imgUrl = '',
+} = {}) {
   return {
     _id: utilService.makeId(),
     name,
@@ -98,6 +99,7 @@ function createToy({ name = '', price = 0, labels = [], inStock = true } = {}) {
     labels,
     createdAt: Date.now(),
     inStock,
+    imgUrl,
   }
 }
 
@@ -127,6 +129,23 @@ function getFilterFromSearchParams(searchParams) {
 }
 
 function _createToys() {
+  const imgUrls = [
+    'https://i.postimg.cc/VSjnSgLN/22981-7-toy-story-alien-file.png',
+    'https://i.postimg.cc/gXshs0hF/68781-jessie-story-toy-file-sheriff-characters-buzz.png',
+    'https://i.postimg.cc/vxmVNd71/batman.png',
+    'https://i.postimg.cc/grc8Jv9Y/captain.png',
+    'https://i.postimg.cc/mhdMFtR7/deadpool.png',
+    'https://i.postimg.cc/47xyJQYq/ironman.png',
+    'https://i.postimg.cc/v1Lx8m3g/Png-Item-464551.png',
+    'https://i.postimg.cc/LY9YJMby/Png-Item-465253.png',
+    'https://i.postimg.cc/QVn9dwkb/Png-Item-494826.png',
+    'https://i.postimg.cc/V5N01mMv/Png-Item-5369982.png',
+    'https://i.postimg.cc/SJJ9LkN3/Png-Item-6498.png',
+    'https://i.postimg.cc/PCD8cyDM/Png-Item-7093.png',
+    'https://i.postimg.cc/2VMZ2M16/Png-Item-7737.png',
+    'https://i.postimg.cc/cKN8N3MG/Png-Item-8473.png',
+    'https://i.postimg.cc/r0fdWP6q/xmen.png',
+  ]
   let toys = utilService.loadFromStorage(STORAGE_KEY)
   if (!toys || !toys.length) {
     toys = []
@@ -136,6 +155,7 @@ function _createToys() {
         price: Math.floor(Math.random() * 81) + 20,
         labels: utilService.getRandomLabels(labels),
         inStock: Math.random() > 0.5,
+        imgUrl: imgUrls[i % imgUrls.length],
       })
       toys.push(toy)
     }

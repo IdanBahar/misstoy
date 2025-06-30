@@ -63,5 +63,8 @@ button {
 .main-container {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 0 1rem;
+  padding: 3rem 1rem;
+}
+.main-container.dark {
+  background-color: #000;
 }

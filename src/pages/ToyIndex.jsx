@@ -1,5 +1,4 @@
 import { useEffect } from 'react'
-import { Link, Outlet, useSearchParams } from 'react-router-dom'
 
 import { useSelector } from 'react-redux'
 import { ToyList } from '../cmps/ToyList.jsx'
@@ -33,14 +32,13 @@ export function ToyIndex() {
   }
 
   // console.log('toys:', toys)
-  const { name, label, isStock, sortBy } = filterBy
+  const { name, label, inStock, sortBy } = filterBy
 
   return (
     <section className='robot-index'>
-      <h1>Welcome to Our amazing toy app!</h1>
       <ToyFilter
         onSetFilterBy={onSetFilterBy}
-        filterBy={{ name, label, isStock, sortBy }}
+        filterBy={{ name, label, inStock, sortBy }}
       />
 
       <ToyList toys={toys} onRemoveToy={onRemoveToy} />

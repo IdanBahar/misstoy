@@ -1,0 +1,30 @@
+.theme-toggle-switch {
+  width: 52px;
+  height: 28px;
+  border-radius: 999px;
+  background-color: #ccc;
+  border: none;
+  position: relative;
+  padding: 0;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.theme-toggle-switch .toggle-circle {
+  width: 24px;
+  height: 24px;
+  background-color: white;
+  border-radius: 50%;
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  transition: transform 0.3s ease;
+}
+
+.theme-toggle-switch.dark {
+  background-color: #4dd0e1;
+}
+
+.theme-toggle-switch.dark .toggle-circle {
+  transform: translateX(24px);
+}
