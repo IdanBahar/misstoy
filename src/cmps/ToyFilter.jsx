@@ -60,14 +60,14 @@ export function ToyFilter({ filterBy, onSetFilterBy }) {
   }
 
   const labels = [
-    'On wheels',
-    'Box game',
-    'Art',
-    'Baby',
+    'Classic',
+    'Educational',
+    'Funny',
+    'Action',
+    'Creative',
+    'STEM',
     'Doll',
-    'Puzzle',
-    'Outdoor',
-    'Battery Powered',
+    'Battery Powered'
   ]
 
   return (

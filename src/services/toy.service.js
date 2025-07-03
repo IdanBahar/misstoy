@@ -77,7 +77,7 @@ async function remove(id) {
 }
 
 function save(toyToSave) {
-  if (toyToSave._id) {
+  if (toyToSave.id) {
     return storageService.put(STORAGE_KEY, toyToSave)
   } else {
     toyToSave.isOn = false
@@ -93,7 +93,7 @@ function createToy({
   imgUrl = '',
 } = {}) {
   return {
-    _id: utilService.makeId(),
+    id: utilService.makeId(),
     name,
     price,
     labels,

@@ -1,0 +1,126 @@
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.toy-edit {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(5px);
+  background-color: rgba(0, 0, 0, 0.2);
+  z-index: 10;
+  animation: fadeIn 0.3s ease-out;
+}
+
+.toy-edit form {
+  background: linear-gradient(135deg, #fffdf7, #fef4e8);
+  border: 1px solid #f3d1a2;
+  padding: 2em;
+  border-radius: 12px;
+  width: 100%;
+  max-width: 500px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+  position: relative;
+}
+
+.toy-edit h1 {
+  text-align: center;
+  margin-bottom: 1em;
+}
+
+.toy-edit h2 {
+  font-size: 1.4em;
+  color: #f68537;
+  margin-top: 1.5em;
+  margin-bottom: 0.5em;
+}
+
+.toy-edit label {
+  display: block;
+  margin-top: 1em;
+}
+
+.toy-edit .label-group {
+  background-color: #f9f0e4;
+  padding: 0.3em 0.6em;
+  border-radius: 6px;
+  margin: 0.3em 0.5em 0.3em 0;
+}
+
+.toy-edit input[type='text'],
+.toy-edit input[type='number'] {
+  width: 100%;
+  padding: 0.5em;
+  margin-top: 0.3em;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+.toy-edit input[type='checkbox'] {
+  accent-color: #f68537;
+  margin-right: 0.4em;
+  vertical-align: middle;
+}
+
+.toy-edit .form-group label input[type='checkbox'] {
+  display: inline-block;
+  width: auto;
+}
+
+.toy-edit .form-group {
+  background-color: #fffaf3;
+  padding: 0.8em;
+  border-radius: 8px;
+  margin-bottom: 1em;
+}
+
+.toy-edit fieldset {
+  border: none;
+  margin-top: 1em;
+  padding: 0;
+}
+
+.toy-edit fieldset label {
+  display: inline-block;
+  margin-right: 0.5em;
+}
+
+.toy-edit .btns {
+  margin-top: 1.5em;
+  text-align: center;
+}
+
+.toy-edit .btn {
+  padding: 0.7em 1.5em;
+  border: none;
+  border-radius: 6px;
+  background-color: #f68537;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.toy-edit .close-btn {
+  position: absolute;
+  top: 1em;
+  right: 1em;
+  background: none;
+  border: none;
+  font-size: 1.2em;
+  cursor: pointer;
+}
+@media (max-width: 600px) {
+  .toy-edit form {
+    padding: 1.5em;
+    width: 90%;
+  }
+}

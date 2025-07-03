@@ -4,7 +4,7 @@ import { toyService } from '../services/toy.service'
 import { ThemeContext } from '../contexts/ThemeContext'
 
 export function ToyDetails() {
-  const { theme, setTheme } = useContext(ThemeContext)
+  const { theme } = useContext(ThemeContext)
   const [toy, setToy] = useState(null)
   const params = useParams()
   useEffect(() => {

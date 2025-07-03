@@ -6,6 +6,7 @@ import { loadToys, removeToy, setFilterBy } from '../store/toy/toy.action.js'
 import { showErrorMsg, showSuccessMsg } from '../services/event-bus.service'
 import { useFilterSearchParams } from '../customHooks/useFilterSearchParams'
 import { ToyFilter } from '../cmps/ToyFilter.jsx'
+import { Outlet } from 'react-router-dom'
 
 export function ToyIndex() {
   const toys = useSelector((storeState) => storeState.toyModule.toys)
@@ -35,13 +36,14 @@ export function ToyIndex() {
   const { name, label, inStock, sortBy } = filterBy
 
   return (
-    <section className='robot-index'>
+    <section className='toy-index'>
       <ToyFilter
         onSetFilterBy={onSetFilterBy}
         filterBy={{ name, label, inStock, sortBy }}
       />
 
       <ToyList toys={toys} onRemoveToy={onRemoveToy} />
+      <Outlet />
     </section>
   )
 }

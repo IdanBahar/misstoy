@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import { HashRouter as Router, Routes, Route, Outlet } from 'react-router-dom'
 // import { useState } from 'react'
 
 import '../src/css/index.css'
@@ -21,6 +21,7 @@ import { UserMsg } from './cmps/UserMsg.jsx'
 import { ThemeContext } from './contexts/ThemeContext.jsx'
 import { useState } from 'react'
 import { ToyDetails } from './pages/ToyDetails.jsx'
+import { ToyEdit } from './pages/ToyEdit.jsx'
 
 function App() {
   const [theme, setTheme] = useState()
@@ -32,10 +33,11 @@ function App() {
           <main className={`main-container ${theme ? 'dark' : ''}`}>
             <Routes>
               <Route path='/' element={<Home />} />
-
               <Route path='/about' element={<About />} />
-
-              <Route path='/toy' element={<ToyIndex />} />
+              <Route path='/toy' element={<ToyIndex />}>
+                <Route path='edit/:toyId?' element={<ToyEdit />} />
+              </Route>
+              /
               <Route path='/toy/:toyId' element={<ToyDetails />} />
             </Routes>
           </main>

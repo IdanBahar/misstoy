@@ -5,15 +5,11 @@ import { ThemeContext } from '../contexts/ThemeContext'
 import { useContext } from 'react'
 
 export function ToyPreview({ toy }) {
-  // console.log('toy.name:', toy.name)
-  // console.log('toy.id:', toy._id)
-  // console.log('SEED:', `${toy._id}-${toy.name}-random`)
-
   const { theme, setTheme } = useContext(ThemeContext)
 
   return (
     <article className={`toy-preview ${theme ? 'dark' : ''}`}>
-      <Link to={`/toy/${toy._id}`}>
+      <Link to={`/toy/${toy.id}`}>
         <img src={toy.imgUrl} alt={toy.name} />
       </Link>
       <h2>{toy.name}</h2>
